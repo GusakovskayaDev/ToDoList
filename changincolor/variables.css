@@ -1,0 +1,15 @@
+:root[data-theme='light'] {
+	--background: white;
+	--backgroundAccent: blue;
+	--colorPrimary: white;
+	--colorSecondary: black;
+	--toggle-bg: #CFCFCF;
+}
+
+:root[data-theme='dark'] {
+	--background: #383838;
+	--backgroundAccent: #1e1e1e;
+	--colorPrimary: white;
+	--colorSecondary: white;
+	--toggle-bg: #666666;
+}
