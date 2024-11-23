@@ -3,39 +3,67 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Animation</title>
+	<title>taskManager</title>
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 	<header class="header">
-		<div class="theme-switcher">
-			<input type="checkbox" id="changeThemeBtn" class="switch-input" />
-			<label for="changeThemeBtn" class="switch-label"></label>
+		<div class="header_switcher switcher"> 
+			<input type="checkbox" id="switcher_checkbox" class="switcher_checkbox" />
+			<label for="switcher_checkbox" class="switcher_label"></label>
 		</div>
 	</header>
 	
 	<aside class="sidebar">
-		<h1 class="sidebar_title">taskManager</h1>
-		<nav>
-			<li><a href="">Задачи</a></li>
+		<h1 class="sidebar__title"><span class="sidebar__span">task</span>Manager</h1>
+		<nav class="sidebar__menu">
+			<li class="sidebar__item"><a class="sidebar__link" data-key="1" href="">Задачи</a></li>
+			<li class="sidebar__item"><a class="sidebar__link" data-key="2" href="">График</a></li>
 		</nav>
 	</aside>
 
-<div class="twoColoumn">
-	<div class="tasks_block">
-		<h1>Tasks</h1>
-		<div class="tasks_container">
+	<main id="main" class="main">
+		<section id="1" class="main__section section">
+			<h1 class="section__title">Tasks</h1>
+			<div class="section__tasks tasks">
 			
-		</div>
-	</div>
+			</div>
+			<h1 class="section__title">Complitied Tasks</h1>
+			<div class="completedTasks_block">
+				<div class="complitiedTasks_container">
+					
+				</div>
+			</div>
+			<!-- <div class="section__settings settings">
+				<button class="settings__add"><img class="settings__add-image" src="src/icons/add.svg" alt="add task"></button>
+				<button class="settings__edit"><img class="settings__edit-image" src="src/icons/edit.svg" alt="edit task"></button>
+				<button class="settings__delete"><img class="settings__delete-image" src="src/icons/delete.svg" alt="delete task"></button> 
+			</div> -->
+		</section>
+	
+		<section id="2" class="main_section section">
+			<h1 class="section__title">График</h1>
+			
+		</section>
+	</main>
 
-	<div class="completedTasks_block">
+
+
+<div class="twoColoumn">
+	<!-- <div class="tasks_block">
+		<h1>Tasks</h1>
+			<div class="tasks_container">
+			
+			</div>
+	</div> -->
+
+	<!-- <div class="completedTasks_block">
 		<h1>Complitied Tasks</h1>
 		<div class="complitiedTasks_container">
 			
 		</div>
-	</div>
+	</div> -->
 </div>
 	
 
