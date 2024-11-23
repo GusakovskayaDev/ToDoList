@@ -1,19 +1,16 @@
-:root[data-theme='light'] {
-	--background: #f2f2f2;
-	--backgroundAccent: white;
-	--colorPrimary: #272727;
-	--colorSecondary: #272727;
-	--colorAccent: #272727;
-	--toggle-bg: #CFCFCF;
-}
+:root{
+	--h1-md: 28px;
+	--h1-fs: 20px;
+	--h2-fs: 18px;
+	--h3-fs: 16px;
+	--h4-fs: 14px;
+	--h5-fs: 12px;
+	--h5-fs: 10px;
 
-:root[data-theme='dark'] {
-	--background: #272727;
-	--backgroundAccent: #191919;
-	--colorPrimary: white;
-	--colorSecondary: white;
-	--colorAccent: white;
-	--toggle-bg: #666666;
+	--p-fs-sm: 10px;
+	--p-fs-md: 12px;
+	--p-fs-lg: 16px;
+	--p-fs-xlg: 20px;
 }
 
 *{
@@ -25,7 +22,6 @@
 
 body{
 	margin: 30px;
-	background-color: #f2f2f2;
 }
 
 	/* TASKS */
@@ -47,10 +43,39 @@ body{
 		flex-direction: column;
 		row-gap: 8px;
 	}
-
-	
-
-	
+	.divTask{
+		display: flex;
+		flex-direction: row;
+		box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+	}
+	.divTask:hover{
+		transform: translateY(-0.25em);
+		box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.2);
+	}
+	.divLeft{
+		background-color: white;
+		border-radius: 8px 0px 0px 8px;
+		cursor: pointer;
+		padding: 8px 16px;
+		transition: transform 0.2s;
+		flex: 1;
+	}
+	.divLeft p{
+		font-size: var(--p-fs-md);
+	}
+	.divTitle{
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	.divTitle h2{
+		font-size: var(--h2-fs);
+	}
+	.completed{
+		color: green;
+		font-weight: bold;
+		font-size: var(--p-fs-md);
+	}
 	.delete{
 		color: white;
 		border: none;

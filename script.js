@@ -1,5 +1,5 @@
 // Получение доступа к необходимым элементам
-const tasks = document.querySelector('.tasks');
+const tasks_container = document.querySelector('.tasks_container');
 const title = document.getElementById('title');
 const desc = document.getElementById('desc');
 const add = document.querySelector('.add');
@@ -10,7 +10,7 @@ const popup_block = document.querySelector('.popup_block');
 // Собрала в кучу прослушивателей событий
 function addEventListeners() {
 
-	const tasks = document.querySelectorAll('.tasks__text');
+	const tasks = document.querySelectorAll('.divLeft');
 	const popup_block = document.querySelector('.popup_block');
 	const popupTitle = document.getElementById('titleHere');
 	const descHere = document.getElementById('descHere');
@@ -48,65 +48,57 @@ const dataManager = {
 
 	// Вывод записей на страницу
 	displayRecord(record) {
-    const tasks__container = document.createElement('div');
-    tasks__container.classList.add('tasks__container');
+    const divTask = document.createElement('div');
+    divTask.classList.add('divTask');
 
-		const tasks__text = document.createElement('div'); 
-		tasks__text.classList.add('tasks__text');
-		tasks__text.data = {title: record.title, description: record.description, completed: record.completed}
-		const tasks__settings = document.createElement('img');
-		tasks__settings.classList.add('tasks__settings');
-		tasks__settings.src = 'src/icons/more.svg';
-		tasks__settings.alt = 'open settings';
-		// const button = document.createElement('button');
-		// button.classList.add('delete');
-		// button.innerHTML = 'Delete';
-		// button.data = record.title;
+		const divLeft = document.createElement('div');
+		divLeft.classList.add('divLeft');
+		divLeft.data = {title: record.title, description: record.description, completed: record.completed}
+		const divRight = document.createElement('div');
+		const button = document.createElement('button');
+		button.classList.add('delete');
+		button.innerHTML = 'Delete';
+		button.data = record.title;
 
-    const tasks__title = document.createElement('h2');
-		tasks__title.classList.add('tasks__title');
-    tasks__title.innerHTML = record.title;
+    const h2 = document.createElement('h2');
+    h2.innerHTML = record.title;
 
-    const tasks__description = document.createElement('p');
-		tasks__description.classList.add('tasks__description');
-    tasks__description.innerHTML = record.description.split(' ').slice(0, 6).join(' ') + `...`;
+    const p = document.createElement('p');
+    p.innerHTML = record.description;
 
-    const tasks__titleContainer = document.createElement('div');
-    tasks__titleContainer.classList.add('tasks__title-container');
+    const divTitle = document.createElement('div');
+    divTitle.classList.add('divTitle');
 
-    const tasks__date = document.createElement('p');
-    tasks__date.classList.add('tasks__date');
-    tasks__date.innerHTML = '24.11.2024';
-    // const completed = document.createElement('p');
-    // completed.classList.add('completed');
-    // completed.innerHTML = record.completed ? 'Completed &#x2713;' : '';
+    const completed = document.createElement('p');
+    completed.classList.add('completed');
+    completed.innerHTML = record.completed ? 'Completed &#x2713;' : '';
 	
 
-		// tasks__settings.appendChild(button);
+		divRight.appendChild(button);
 
-		tasks__titleContainer.appendChild(tasks__title);
-		tasks__titleContainer.appendChild(tasks__date);
+		divTitle.appendChild(h2);
+		divTitle.appendChild(completed);
 
-		tasks__text.appendChild(tasks__titleContainer);
-		tasks__text.appendChild(tasks__description);
+		divLeft.appendChild(divTitle);
+		divLeft.appendChild(p);
 
-		tasks__container.appendChild(tasks__text);
-		tasks__container.appendChild(tasks__settings);
+		divTask.appendChild(divLeft);
+		divTask.appendChild(divRight);
 
-    tasks.appendChild(tasks__container);
+    tasks_container.appendChild(divTask);
 
 		if(record.completed){
-			complitiedTasks_container.appendChild(tasks__container);
+			complitiedTasks_container.appendChild(divTask);
 		}
 
 		// Добавляем обработчик удаления
-	// 	button.addEventListener('click', () => {
-	// 	const index = this.data.findIndex(element => element.title === button.data);
-	// 	if (index !== -1) {
-	// 		this.removeRecord(index);
-	// 		tasks__container.remove(); // Удаляем элемент из DOM
-	// 	}
-	// });
+		button.addEventListener('click', () => {
+		const index = this.data.findIndex(element => element.title === button.data);
+		if (index !== -1) {
+			this.removeRecord(index);
+			divTask.remove(); // Удаляем элемент из DOM
+		}
+	});
 
 		// Помечаем задачу сделанной
 		const take = document.querySelectorAll('.take');
@@ -130,7 +122,7 @@ const dataManager = {
 	
 	// Инициализация данных из localStorage
   async init() {
-		tasks.innerHTML = '';
+		tasks_container.innerHTML = '';
 		complitiedTasks_container.innerHTML = '';
     const storedData = localStorage.getItem('myData');
     this.data = storedData ? JSON.parse(storedData) : [];
@@ -184,57 +176,4 @@ clear.addEventListener('click', () => {
 	title.value = '';
 	desc.value = '';
 });
-
-
-
-// changing themes _______________________________________
-const savedTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', savedTheme);
-const switcher_checkbox = document.getElementById('switcher_checkbox');
-//
-if (localStorage.getItem('checkboxChecked') === 'true') {
-	switcher_checkbox.checked = true;
-}
-
-
-switcher_checkbox.addEventListener('click', () => {
-	const currentTheme = document.documentElement.getAttribute('data-theme');
-	const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  document.documentElement.setAttribute('data-theme', newTheme);
-	localStorage.setItem('theme', newTheme);
-	//
-	localStorage.setItem('checkboxChecked', switcher_checkbox.checked);
-});
-
-
-// menu _______________________________________
-const main = document.getElementById('main');
-const sidebar = document.querySelector('.sidebar');
-const sections = document.querySelectorAll('.section');
-const sidebar__link = document.querySelectorAll('.sidebar__link');
-
-sidebar.addEventListener('click', (event) => {
-    const target = event.target;
-    if (target.classList.contains('sidebar__link')) {
-      event.preventDefault();
-
-			sidebar__link.forEach((link) => {
-				link.addEventListener('click', () => {target.classList.remove('sidebar__link_active')});
-			});
-
-			const idSection = target.getAttribute('data-key');
-			const section_dom = document.getElementById(idSection);
-			
-			
-			sections.forEach((section) => {
-				section.classList.remove('active');
-				section_dom.classList.add('active');
-				target.classList.add('sidebar__link_active');
-			})
-    }
-  },
-  false
-);
-
 
